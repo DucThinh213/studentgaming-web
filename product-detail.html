@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chi tiết sản phẩm | StudentGaming.vn</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #product-detail { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+    .product-box { background-color: #2c2c2c; padding: 20px; border-radius: 10px; width: 300px; text-align: center; }
+    .product-box img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
+    .product-title {
+  color: #00ffff;
+  text-shadow: 0 0 8px #00ffff;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Nút thêm vào giỏ hàng - Cyan Neon */
+.product-detail-btn {
+  background-color: transparent;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+.product-detail-btn:hover {
+  background-color: #001f1f;
+  box-shadow: 0 0 15px #00ffff;
+  transform: scale(1.05);
+}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="cart.html">Giỏ hàng</a>
+    </nav>
+  </header>
+
+  <section id="product-detail">
+    <!-- PC Giga Student -->
+    <div class="product-box">
+      <img src="img/pc-giga.jpg" alt="PC Giga Student">
+      <h2 class="product-title">PC Giga Student</h2>
+      <p><strong>Giá:</strong> 13.000.000đ</p>
+      <p><strong>Cấu hình:</strong> Ryzen 5, RTX 3060, RAM 16GB, SSD 512GB</p>
+      <p><strong>Mô tả:</strong> Thích hợp chơi LOL, CSGO, FIFA, thiết kế đồ họa cơ bản</p>
+      <a href="cart.html"><button class="product-detail-btn">Thêm vào giỏ hàng</button></a>
+    </div>
+
+    <!-- PC Budget Hero -->
+    <div class="product-box">
+      <img src="img/pc-budget.jpg" alt="PC Budget Hero">
+      <h2 class="product-title">PC Budget Hero</h2>
+      <p><strong>Giá:</strong> 7.800.000đ</p>
+      <p><strong>Cấu hình:</strong> Intel Core i3, GTX 1650, RAM 8GB, SSD 256GB</p>
+      <p><strong>Mô tả:</strong> Phù hợp chơi LOL, Valorant, học lập trình, tiết kiệm điện</p>
+      <a href="cart.html"><button class="product-detail-btn">Thêm vào giỏ hàng</button></a>
+    </div>
+
+    <!-- PC Streamer Pro -->
+    <div class="product-box">
+      <img src="img/pc-streamer.jpg" alt="PC Streamer Pro">
+      <h2 class="product-title">PC Streamer Pro</h2>
+      <p><strong>Giá:</strong> 18.500.000đ</p>
+      <p><strong>Cấu hình:</strong> Ryzen 7, RX 6700XT, RAM 32GB, SSD 1TB</p>
+      <p><strong>Mô tả:</strong> Livestream mượt, làm đồ họa, dựng video, chơi game ổn</p>
+      <a href="cart.html"><button class="product-detail-btn">Thêm vào giỏ hàng</button></a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 StudentGaming.vn</p>
+  </footer>
+</body>
+</html>

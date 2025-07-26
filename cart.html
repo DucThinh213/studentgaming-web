@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Giỏ Hàng - StudentGaming.vn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background-color: #1b1b1b;
+      color: #eee;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    header {
+      background-color: #111;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      text-shadow: 0 0 6px #00ffcc;
+    }
+
+    section {
+      padding: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #00ffcc;
+    }
+
+    .product-buttons {
+      margin: 10px 0;
+    }
+
+    button {
+      background-color: #00cc99;
+      color: white;
+      padding: 8px 16px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #009977;
+    }
+
+    table {
+      width: 90%;
+      margin: auto;
+      margin-top: 30px;
+      border-collapse: collapse;
+      box-shadow: 0 0 10px #00ffcc;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #555;
+      text-align: center;
+    }
+
+    table tr:hover {
+      background-color: #2c2c2c;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      background-color: #1b1b1b;
+      color: #eee;
+      border: 1px solid #555;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    #total {
+      width: 90%;
+      margin: auto;
+      margin-top: 20px;
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      font-style: italic;
+      font-family: 'Georgia', serif;
+    }
+
+    @media screen and (max-width: 768px) {
+      nav a {
+        display: block;
+        margin: 8px 0;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+
+      table, th, td {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="product-detail.html">Sản phẩm</a>
+      <a href="cart.html">Giỏ hàng</a>
+    </nav>
+  </header>
+
+  <section id="banner">
+    <h2>🎮 StudentGaming.vn – PC Gaming Giá Sinh Viên</h2>
+    <p>Chọn sản phẩm bên dưới để thêm vào giỏ hàng </p>
+  </section>
+
+  <section class="product-buttons">
+    <button onclick="addToCart('PC Giga Student', 13000000)">Thêm PC Giga</button>
+    <button onclick="addToCart('PC Budget Hero', 7800000)">Thêm PC Budget</button>
+    <button onclick="addToCart('PC Streamer Pro', 18500000)">Thêm PC Streamer</button>
+  </section>
+
+  <section id="cart">
+    <h2>🛒 Giỏ hàng của bạn</h2>
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Sản phẩm</th>
+          <th>Giá</th>
+          <th>Số lượng</th>
+          <th>Tổng</th>
+          <th>Xóa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dòng sản phẩm sẽ được thêm vào đây -->
+      </tbody>
+    </table>
+
+    <div id="total">
+      <h3>Tổng cộng: <span id="cart-total">0đ</span></h3>
+      <button>Thanh toán</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 StudentGaming.vn</p>
+  </footer>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const existing = cart.find(item => item.name === name);
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+      renderCart();
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function updateQuantity(index, input) {
+      let qty = parseInt(input.value);
+      if (isNaN(qty) || qty < 1) qty = 1;
+      cart[index].quantity = qty;
+      renderCart();
+    }
+
+    function renderCart() {
+      const tbody = document.querySelector("#cartTable tbody");
+      tbody.innerHTML = "";
+      let sum = 0;
+
+      cart.forEach((item, i) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item.price.toLocaleString()}đ</td>
+          <td><input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${i}, this)"></td>
+          <td>${(item.quantity * item.price).toLocaleString()}đ</td>
+          <td><button onclick="removeItem(${i})">X</button></td>
+        `;
+
+        tbody.appendChild(row);
+        sum += item.quantity * item.price;
+      });
+
+      document.getElementById("cart-total").textContent = sum.toLocaleString('vi-VN') + "đ";
+    }
+  </script>
+</body>
+</html>
