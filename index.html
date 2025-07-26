@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>StudentGaming.vn - Trang chủ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Form tư vấn */
+    #form-consult {
+      background-color: #2c2c2c;
+      padding: 30px;
+      margin: 50px auto;
+      width: 80%;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    #form-consult h2 {
+      margin-bottom: 20px;
+      color: #00ffcc;
+    }
+
+    #form-consult form input,
+    #form-consult form textarea {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 6px;
+      background-color: #1b1b1b;
+      color: #eee;
+    }
+
+    #form-consult form button {
+      background-color: #00ffcc;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="img/logo.png" alt="Logo" height="60" />
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="product-detail.html">Sản phẩm</a>
+      <a href="cart.html">Giỏ hàng</a>
+      <a href="login.html">Đăng nhập</a>
+      <a href="signup.html">Đăng ký</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <section id="banner">
+    <img src="img/banner.jpg" alt="Banner PC Gaming">
+    <h2>🎮 PC Gaming Giá Sinh Viên, Cấu Hình VIP</h2>
+    <button>Xem ngay</button>
+  </section>
+
+  <section id="products">
+    <div class="product">
+      <img src="img/pc-giga.jpg" alt="PC Giga Student">
+      <h3>PC Giga Student</h3>
+      <p>13.000.000đ</p>
+      <a href="product-detail.html"><button>Chi tiết</button></a>
+    </div>
+
+    <div class="product">
+      <img src="img/pc-budget.jpg" alt="PC Budget Hero">
+      <h3>PC Budget Hero</h3>
+      <p>7.800.000đ</p>
+      <a href="product-detail.html"><button>Chi tiết</button></a>
+    </div>
+
+    <div class="product">
+      <img src="img/pc-streamer.jpg" alt="PC Streamer Pro">
+      <h3>PC Streamer Pro</h3>
+      <p>18.500.000đ</p>
+      <a href="product-detail.html"><button>Chi tiết</button></a>
+    </div>
+    
+  </section>
+
+  <section id="form-consult">
+    <h2>📋 Đăng ký bảo dưỡng / tư vấn sản phẩm</h2>
+    <form>
+      <input type="text" placeholder="Nhập tên để được tư vấn" required>
+      <input type="email" placeholder="Nhập Email" required>
+      <input type="tel" placeholder="Nhập số điện thoại" required>
+      <textarea placeholder="Nội dung cần để bảo dưỡng" rows="4" required></textarea>
+      <button type="submit">Xác nhận</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 StudentGaming.vn | Liên hệ: 0703.302.580</p>
+  </footer>
+</body>
+</html>
