@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Trang Quản Trị Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #1a1a1a;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+    }
+    h1, h2, h3 {
+      text-align: center;
+      color: #00ffcc;
+      margin: 20px 0;
+    }
+    table {
+      width: 90%;
+      margin: auto;
+      border-collapse: collapse;
+      transition: all 0.3s ease;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 12px;
+      text-align: center;
+    }
+    tr:hover {
+      background-color: #2a2a2a;
+    }
+    button {
+      padding: 6px 12px;
+      background-color: #00cc99;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    button:hover {
+      background-color: #00b38f;
+    }
+    .form-section {
+      margin: 30px auto;
+      width: 80%;
+      background: #2c2c2c;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .form-section input,
+    .form-section select {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      background: #1b1b1b;
+      color: #fff;
+    }
+    .form-section button {
+      width: 100%;
+    }
+    .back-home {
+      text-align: center;
+      margin: 30px 0;
+    }
+    .back-home button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌟 Trang quản trị Admin</h1>
+
+  <!-- Quản lý sản phẩm -->
+  <h2>🧑‍💼 Quản lý sản phẩm</h2>
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>Sản phẩm</th>
+        <th>Giá</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PC Giga Student</td>
+        <td>13.000.000đ</td>
+        <td>
+          <button onclick="editProduct(this)">Sửa</button>
+          <button onclick="deleteProduct(this)">Xóa</button>
+        </td>
+      </tr>
+      <tr>
+        <td>PC Budget Hero</td>
+        <td>7.800.000đ</td>
+        <td>
+          <button onclick="editProduct(this)">Sửa</button>
+          <button onclick="deleteProduct(this)">Xóa</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="form-section">
+    <h3>➕ Thêm sản phẩm mới</h3>
+    <input type="text" id="new-name" placeholder="Tên sản phẩm" required>
+    <input type="text" id="new-price" placeholder="Giá sản phẩm (đ)" required>
+    <button onclick="addProduct()">Thêm vào bảng</button>
+  </div>
+
+  <!-- Quản lý hóa đơn -->
+  <h2>🧾 Quản lý hóa đơn</h2>
+  <table id="invoice-table">
+    <thead>
+      <tr>
+        <th>Mã hóa đơn</th>
+        <th>Tên khách hàng</th>
+        <th>Sản phẩm</th>
+        <th>Tổng tiền</th>
+        <th>Ngày đặt</th>
+        <th>Trạng thái</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- hóa đơn được thêm bằng JS -->
+    </tbody>
+  </table>
+
+  <div class="form-section">
+    <h3>📝 Thêm hóa đơn mới</h3>
+    <input type="text" id="cus-name" placeholder="Tên khách hàng" required>
+    <input type="text" id="cus-items" placeholder="Sản phẩm và số lượng" required>
+    <input type="number" id="cus-total" placeholder="Tổng tiền (VNĐ)" required>
+    <input type="date" id="cus-date" required>
+    <select id="cus-status" required>
+      <option value="">Chọn trạng thái</option>
+      <option>Đã thanh toán</option>
+      <option>Chờ xử lý</option>
+      <option>Đã hủy</option>
+    </select>
+    <button onclick="addInvoice()">Thêm vào bảng hóa đơn</button>
+  </div>
+  <!-- Quản lý doanh thu -->
+<h2>📈 Quản lý doanh thu</h2>
+<table id="revenue-table">
+  <thead>
+    <tr>
+      <th>Thời gian</th>
+      <th>Số đơn hàng</th>
+      <th>Tổng doanh thu</th>
+      <th>Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Dữ liệu thống kê sẽ hiển thị tại đây -->
+  </tbody>
+</table>
+
+<div class="form-section">
+  <h3>📅 Thống kê doanh thu theo ngày</h3>
+  <input type="date" id="revenue-date">
+  <button onclick="calcRevenue()">Thống kê doanh thu</button>
+</div>
+
+
+
+
+
+  <div class="back-home">
+    <button onclick="window.location.href='index.html'">🏠 Về trang chủ</button>
+  </div>
+
+  <!-- JS chung -->
+  <script>
+    function deleteProduct(btn) {
+      if (confirm("Bạn có chắc muốn xoá sản phẩm này không?")) {
+        btn.closest("tr").remove();
+      }
+    }
+
+    function editProduct(btn) {
+      let row = btn.closest("tr");
+      let nameCell = row.cells[0];
+      let priceCell = row.cells[1];
+
+      let newName = prompt("Tên mới của sản phẩm:", nameCell.textContent);
+      let newPrice = prompt("Giá mới của sản phẩm:", priceCell.textContent.replace("đ", ""));
+
+      if (newName) nameCell.textContent = newName;
+      if (newPrice) priceCell.textContent = newPrice + "đ";
+    }
+
+    function addProduct() {
+      let name = document.getElementById("new-name").value;
+      let price = document.getElementById("new-price").value;
+
+      if (!name || !price) {
+        alert("Vui lòng nhập đầy đủ thông tin.");
+        return;
+      }
+
+      let table = document.getElementById("product-table").getElementsByTagName("tbody")[0];
+      let newRow = table.insertRow();
+      newRow.innerHTML = `
+        <td>${name}</td>
+        <td>${price}đ</td>
+        <td>
+          <button onclick="editProduct(this)">Sửa</button>
+          <button onclick="deleteProduct(this)">Xóa</button>
+        </td>
+      `;
+      document.getElementById("new-name").value = "";
+      document.getElementById("new-price").value = "";
+    }
+
+    // Hóa đơn JS
+    let invoiceCount = 1;
+
+    function addInvoice() {
+      const name = document.getElementById("cus-name").value;
+      const items = document.getElementById("cus-items").value;
+      const total = document.getElementById("cus-total").value;
+      const date = document.getElementById("cus-date").value;
+      const status = document.getElementById("cus-status").value;
+
+      if (!name || !items || !total || !date || !status) {
+        alert("Nhập đầy đủ các trường hóa đơn.");
+        return;
+      }
+
+      const table = document.getElementById("invoice-table").getElementsByTagName("tbody")[0];
+      const row = table.insertRow();
+      row.innerHTML = `
+        <td>HD${invoiceCount.toString().padStart(3, '0')}</td>
+        <td>${name}</td>
+        <td>${items}</td>
+        <td>${total} VNĐ</td>
+        <td>${date}</td>
+        <td>${status}</td>
+        <td>
+          <button onclick="alert('Chi tiết hóa đơn HD${invoiceCount}')">Xem</button>
+          <button onclick="this.parentElement.parentElement.remove()">Xóa</button>
+        </td>
+      `;
+      invoiceCount++;
+
+      // Reset form
+      document.getElementById("cus-name").value = "";
+      document.getElementById("cus-items").value = "";
+      document.getElementById("cus-total").value = "";
+      document.getElementById("cus-date").value = "";
+      document.getElementById("cus-status").value = "";
+    }
+    function calcRevenue() {
+  const targetDate = document.getElementById("revenue-date").value;
+  if (!targetDate) {
+    alert("Vui lòng chọn ngày để thống kê!");
+    return;
+  }
+
+  let totalRevenue = 0;
+  let invoiceCount = 0;
+
+  const rows = document.getElementById("invoice-table").getElementsByTagName("tbody")[0].rows;
+
+  for (let row of rows) {
+    const date = row.cells[4].textContent;
+    let amountText = row.cells[3].textContent;
+
+    amountText = amountText.replace(" VNĐ", "").replace(/\./g, "").replace(/,/g, "");
+    const amount = parseInt(amountText);
+
+    if (date === targetDate) {
+      totalRevenue += amount;
+      invoiceCount++;
+    }
+  }
+
+  const table = document.getElementById("revenue-table").getElementsByTagName("tbody")[0];
+  const newRow = table.insertRow();
+  newRow.innerHTML = `
+    <td>${targetDate}</td>
+    <td>${invoiceCount}</td>
+    <td>${totalRevenue.toLocaleString()} VNĐ</td>
+    <td><button onclick="this.parentElement.parentElement.remove()">Xóa</button></td>
+  `;
+}
+
+
+
+    
+  </script>
+
+</body>
+</html>
